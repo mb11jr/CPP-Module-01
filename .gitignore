@@ -1,0 +1,7 @@
+.vscode
+zombie
+zombie_horde
+brain
+
+obj/
+*.o
