@@ -3,44 +3,26 @@ NAME = zombie
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC_DIR = src/
-OBJ_DIR = obj/
-INC_DIR = include/
-
-SRC_FILES = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
-OBJ_FILES = $(SRC_FILES:.cpp=.o)
-
-SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+SRC = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Compiling [$(NAME)]..."
+	@echo "🔨 Compiling [$(NAME)]..."
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@echo "Finished [$(NAME)]"
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
-	@mkdir -p $(OBJ_DIR)
-	@echo "Compiling [$@]..."
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ -c $<
-	@echo "Finished [$@]"
+%.o:%.cpp
+	@echo "🔨 Compiling [$@]..."
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	@if [ -d "$(OBJ_DIR)" ]; then \
-		rm -rf $(OBJ_DIR); \
-		echo "Deleting all objects from /ex00..."; \
-	else \
-		echo "No objects to remove from /ex00."; \
-	fi;
+	@rm -rf $(OBJ)
+	@echo "Deleting all objects..."; \
 
 fclean: clean
-	@if [ -f "$(NAME)" ]; then \
-		rm -f $(NAME); \
-		echo "Deleting $(NAME) from /ex00..."; \
-	else \
-		echo "No executable to remove from ex00."; \
-	fi;
+	@rm -f $(NAME)
+	@echo "Deleting $(NAME)..."; \
 
 re: fclean all
 

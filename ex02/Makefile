@@ -3,31 +3,26 @@ NAME = brain
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC_FILES = main.cpp
-OBJ_FILES = $(SRC_FILES:.cpp=.o)
-
-SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+SRC = main.cpp
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Compiling [$(NAME)]..."
+	@echo "🔨 Compiling [$(NAME)]..."
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@echo "Finished [$(NAME)]"
 
-%.o: %.cpp
-	@echo "Compiling [$@]..."
+%.o:%.cpp
+	@echo "🔨 Compiling [$@]..."
 	@$(CC) $(CFLAGS) -o $@ -c $<
-	@echo "Finished [$@]"
 
 clean:
-	@rm -f $(OBJ)
-	@echo "Object files removed."
+	@rm -rf $(OBJ)
+	@echo "Deleting all objects..."; \
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "Executable removed."
+	@echo "Deleting $(NAME)..."; \
 
 re: fclean all
 
