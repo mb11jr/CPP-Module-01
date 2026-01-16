@@ -3,5 +3,7 @@ zombie
 zombie_horde
 brain
 weapon
-
+replace
+harl
+test*
 *.o
